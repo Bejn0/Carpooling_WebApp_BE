@@ -14,6 +14,7 @@
                  [ring/ring-core "1.9.6"]
                  [ring/ring-json "0.5.1"]
                  [ring-cors "0.1.13"]
+                 [clojure.joda-time "0.7.0"]
                  [ring/ring-jetty-adapter "1.9.6"]]
   :main ^:skip-aot carpooling.core
   :profiles {:uberjar {:aot :all}})

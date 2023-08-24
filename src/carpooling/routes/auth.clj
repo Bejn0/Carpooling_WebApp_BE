@@ -23,6 +23,7 @@
 (defn user-to-session [user]
                               {:id (:user_id user)
                                       :name (:first_name user)
+                                      :last_name (:last_name user)
                                       :email (:email user)})
 
 (defn handle-login [email password]
