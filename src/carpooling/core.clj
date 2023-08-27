@@ -3,7 +3,6 @@
             [carpooling.handler :refer [app]]))
 
 
-
 (defonce server (atom nil))
 
 (defn start-server []
@@ -15,3 +14,7 @@
   (when-some [s @server]
     (.stop s)
     (reset! server nil)))
+
+(defn -main
+  [& args]
+  (start-server))
