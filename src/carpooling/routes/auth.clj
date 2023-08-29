@@ -45,7 +45,9 @@
 
 (defroutes auth-routes
            (POST "/register" request
-             (json/write-str(let [{:keys [first_name last_name email password password_confirmation]} (json/read-str (slurp(:body request)) :key-fn keyword)]
+             (json/write-str
+               (let [{:keys [first_name last_name email password password_confirmation]}
+                     (json/read-str (slurp(:body request)) :key-fn keyword)]
                        (handle-registration first_name last_name email password password_confirmation)
                        ))
              )

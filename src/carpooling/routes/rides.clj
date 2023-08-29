@@ -12,12 +12,13 @@
        (joda-time.convert/to-sql-timestamp)))
 
 (defn create-ride [start-location end-location date space user-id]
-          (db/create-ride {:start_location start-location :end_location end-location :dateTime (cast-string-to-timestamp-without-time-zone (str date)) :space (Integer/parseInt space) :user_id (Integer/parseInt user-id)})
+          (db/create-ride
+            {:start_location start-location
+             :end_location end-location
+             :dateTime (cast-string-to-timestamp-without-time-zone (str date))
+             :space (Integer/parseInt space)
+             :user_id (Integer/parseInt user-id)})
           (response/status 200))
-
-(defn delete-ride [ride-id]
-  (db/delete-ride ride-id)
-  (response/status 200))
 
 (defroutes rides-routes
            (GET "/rides" []
@@ -30,7 +31,9 @@
                (response/response (db/get-users-rides id)))
              ))
            (POST "/rides" request
-             (json/write-str(let [{:keys [start_location end_location date space user_id]} (json/read-str (slurp(:body request)) :key-fn keyword)]
+             (json/write-str
+               (let [{:keys [start_location end_location date space user_id]}
+                     (json/read-str (slurp(:body request)) :key-fn keyword)]
                               (create-ride start_location end_location date space user_id)
                               ))
              )
